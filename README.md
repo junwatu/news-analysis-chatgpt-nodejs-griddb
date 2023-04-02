@@ -1,1 +1,1 @@
-# news-analysis-openai-griddb
+# News Analysis OpenAI GridDB
