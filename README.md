@@ -1,1 +1,1 @@
-# News Analysis OpenAI GridDB
+# Analyzing News with the Help of OpenAI and GridDB
