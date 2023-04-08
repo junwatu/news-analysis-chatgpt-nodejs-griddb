@@ -1,5 +1,7 @@
 # How to Leverage OpenAI, Node.js, and GridDB for Powerful News Topic Modelling
 
-News topic modelling is an essential aspect of content curation and analysis. With the growing amount of information available online, it has become increasingly difficult for individuals and organizations to efficiently monitor and understand news trends. By leveraging Node.js, OpenAI, and GridDB, developers can create a powerful news topic modelling system that will help users stay informed on trending topics and extract valuable insights.
+News topic modelling is an essential technique in the field of natural language processing (NLP) and machine learning that focuses on automatically identifying, extracting, and categorizing the main topics or themes present in a collection of news articles. By leveraging advanced algorithms and NLP techniques, such as the powerful GPT-3.5 model developed by OpenAI, news topic modelling can effectively analyze and summarize vast amounts of text data in real-time.
+
+In this blog we will build automated content tagging system. News topic modelling can streamline the content tagging process by automatically assigning appropriate tags or categories to news based on their extracted topics.
 
 ![system-arch](assets/images/system-arch.svg)
