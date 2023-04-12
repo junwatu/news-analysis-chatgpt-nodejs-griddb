@@ -44,15 +44,15 @@ In the given flow diagram, the interaction between ChatGPT, Node.js, and GridDB 
 
 In summary, the updated flow diagram represents a system that employs Node.js for data acquisition and processing, GridDB for data storage, ChatGPT for content tagging, and React for creating a user-friendly interface that presents the data to end-users, resulting in a comprehensive and efficient multi-news data handling solution.
 
-## Key Concepts and Practical Examples
+## Key Concepts and Practical Codes
 
-### What is ChatGPT?
+### Using ChatGPT to Generate News Tags
 
 ChatGPT is an advanced artificial intelligence language model developed by OpenAI, based on the GPT (Generative Pre-trained Transformer) architecture. The model is designed to understand and generate human-like text based on the input it receives. It is capable of performing various tasks, including answering questions, engaging in conversation, and generating text in a range of styles and formats. ChatGPT has been widely used in various applications, such as chatbots, content generation, translation, and more.
 
 As the core natural language processing component, ChatGPT is responsible for analyzing and generating tags from news articles. By leveraging its advanced language understanding capabilities, ChatGPT can identify and group related articles based on their underlying themes, significantly enhancing content organization and discovery.
 
-### Prompt
+#### Prompt
 
 As ChatGPT is capable of natural language understanding, generating tags from a news article is ridiculously easy. All we have to do is ask for it!
 
