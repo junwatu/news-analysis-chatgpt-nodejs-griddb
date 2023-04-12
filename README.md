@@ -12,20 +12,6 @@ In this blog post, we'll create an **automated content tagging system**. We'll d
 
 ChatGPT, developed by OpenAI, is a cutting-edge language model that excels in understanding and generating human-like text. Node.js is a popular open-source runtime environment built on Chrome's V8 JavaScript engine, enabling developers to create scalable and efficient web applications. GridDB is a highly performant NoSQL database designed for handling time-series data and large-scale datasets, with features such as automatic data partitioning and high availability.
 
---- REMOVE ---
-
-### Node.js
-
-Node.js serves as the backbone of the web application, allowing developers to build a fast, scalable, and reliable system for processing and managing news data. With its non-blocking, event-driven architecture and extensive package ecosystem, Node.js makes it easy to implement complex features, such as real-time data processing and API integration.
-
-### GridDB
-
-To store and manage the vast amounts of news data and extracted topics, GridDB comes into play as the data storage solution. Its high-performance capabilities, support for horizontal scaling, and time-series data handling make it an ideal choice for managing the large-scale datasets involved in news topic modelling. Moreover, GridDB's efficient querying and data retrieval features ensure that the application can quickly serve relevant content to users.
-
-By combining the strengths of ChatGPT, Node.js, and GridDB, the powerful news topic modelling system can effectively analyze, organize, and present news content, providing users with a more meaningful and engaging experience.
-
---- END REMOVE ---
-
 ![system-arch](assets/images/system-arch.svg)
 
 In the given flow diagram, the interaction between ChatGPT, Node.js, and GridDB is illustrated, showcasing the overall system workflow for multi-news data acquisition, processing, and content tagging. The diagram can be broken down into the following steps for a better understanding:
@@ -43,6 +29,20 @@ In the given flow diagram, the interaction between ChatGPT, Node.js, and GridDB 
 6. Presenting the Data to the User with React: After the data has been processed, stored, and tagged, it is important to present it in an accessible and user-friendly format. In this case, React, a popular JavaScript library for building user interfaces, is utilized to create a web-based application that displays news and the tagged content in an organized manner.
 
 In summary, the updated flow diagram represents a system that employs Node.js for data acquisition and processing, GridDB for data storage, ChatGPT for content tagging, and React for creating a user-friendly interface that presents the data to end-users, resulting in a comprehensive and efficient multi-news data handling solution.
+
+## Full Project Installation Guide
+
+[DRAFT]
+🎯 Overview of the installation process and requirements
+
+🎯 Step-by-step guide to:
+
+- Installing OpenAI and required dependencies
+- Setting up a Node.js environment and creating a new project
+- Installing and configuring GridDB
+- Integrating OpenAI, Node.js, and GridDB for the news topic modelling system
+
+🎯 Verifying the successful installation and setup
 
 ## Key Concepts and Practical Codes
 
@@ -97,3 +97,46 @@ export { generateTagsFromNews };
 ```
 
 To access the OpenAI API, you'll need to obtain an `OPENAI_API_KEY`, which can be obtained from this [link](https://platform.openai.com/account/api-keys). Note that you'll need to set up a paid account in order to use the API, but the cost is quite low at just $0.002 per 1,000 tokens. A rough estimate is that 1,000 tokens corresponds to around 200 to 300 words in English, based on the average word length of 4-5 characters plus a space (totaling 5-6 characters per word).
+
+### Data Acquisition and Processing with Node.js
+
+Node.js serves as the backbone of the web application, allowing developers to build a fast, scalable, and reliable system for processing and managing news data. With its non-blocking, event-driven architecture and extensive package ecosystem, Node.js makes it easy to implement complex features, such as real-time data processing and API integration.
+
+For an optimal data source, utilizing a news API would be preferable. However, for this specific project, data can be obtained from the Hugging Face website at [huggingface.co](https://huggingface.co/datasets/multi_news).
+
+> Hugging Face is a popular platform for natural language processing (NLP) models and datasets
+
+**Multi-News**, is a dataset on Hugging Face consists of news articles and human-written summaries of these articles from the site newser.com. Each summary is professionally written by editors and includes links to the original articles cited.
+
+With Node.js is easy to consume this data using native `fetch` function:
+
+```js
+async function fetchMultiNews() {
+  const url =
+    "https://datasets-server.huggingface.co/splits?dataset=multi_news";
+
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Dataset splits data:", data);
+      return data;
+    } else {
+      console.error("Error fetching dataset splits:", response.statusText);
+      return response.statusText;
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    throw new Error(error);
+  }
+}
+
+export { fetchMultiNews };
+```
+
+### Storing and Managing Data with GridDB
+
+To store and manage the vast amounts of news data and extracted topics, GridDB comes into play as the data storage solution. Its high-performance capabilities, support for horizontal scaling, and time-series data handling make it an ideal choice for managing the large-scale datasets involved in news tagging. Moreover, GridDB's efficient querying and data retrieval features ensure that the application can quickly serve relevant content to users.
+
+[DRAFT]
+-- code and explanation
