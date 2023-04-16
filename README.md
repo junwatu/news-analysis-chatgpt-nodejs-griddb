@@ -32,17 +32,39 @@ In summary, the updated flow diagram represents a system that employs Node.js fo
 
 ## Full Project Installation Guide
 
-[DRAFT]
-🎯 Overview of the installation process and requirements
+The installation process for the project is straightforward. First, ensure that your operating system has Node.js 18 installed and verify that the GridDB database is operational. On Ubuntu 20.04, you can do this using `systemctl`
 
-🎯 Step-by-step guide to:
+```bash
+sudo systemctl status gridstore
+```
 
-- Installing OpenAI and required dependencies
-- Setting up a Node.js environment and creating a new project
-- Installing and configuring GridDB
-- Integrating OpenAI, Node.js, and GridDB for the news topic modelling system
+If all is well, clone the project from the GitHub repository [news tagging](https://github.com/junwatu/news-analysis-chatgpt-nodejs-griddb-code)
 
-🎯 Verifying the successful installation and setup
+```bash
+git clone git@github.com:junwatu/news-analysis-chatgpt-nodejs-griddb-code.git
+```
+Next, install the project's dependencies
+
+```bash
+cd news-analysis-chatgpt-nodejs-griddb-code
+npm install
+```
+Before running the project, it is crucial to have an OpenAI API key, as this is a primary requirement for this project. To obtain the key, [sign up](https://platform.openai.com/) for an account at OpenAI and follow the instructions to get your API key. Once you have the key, edit `.env` file on `apps/server` directory.
+
+```ini
+OPENAI_API_KEY=<your_api_key>
+```
+
+Replace <your_api_key> with your actual OpenAI API key. With the OpenAI API key set up, you can now proceed with the previously described installation and running steps.
+
+Then to run the project 
+
+```bash
+npx turbo start
+```
+
+Finally, access the web application by navigating to the URL `http://localhost:5137`
+
 
 ## Key Concepts and Practical Codes
 
@@ -61,7 +83,7 @@ A prompt is text used to guide a language model or machine learning system to ge
 To generate tags from a news article, we can provide a prompt to ChatGPT that specifies the desired output. For example, in JavaScript the prompt could be structured like this:
 
 ```js
-const prompt = `Generate five tags from this news with each tag is less than 2 words:\n\n${news}`;
+const prompt = `Generate five tags, less than 3 words, and give numbers for the tags from this news:\n\n${news}`;
 ```
 
 If we apply that prompt directly into the [ChatGPT](https://chat.openai.com/chat) website with a specific `news` we will get 5 tags.
@@ -79,10 +101,11 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 async function generateTagsFromNews(news) {
-  const prompt = `Generate five tags from this news with each tag is less than 2 words:\n\n${news}`;
+  const prompt = `Generate five tags, less than 3 words, and give numbers for the tags from this news:\n\n${news}`;
   try {
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
+      max_tokens: 2000,
       messages: [{ role: "user", content: prompt }],
     });
     return completion.data.choices[0].message;
