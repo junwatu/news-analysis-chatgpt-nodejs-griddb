@@ -234,7 +234,9 @@ function insert(data, container) {
 
 ### Node.js HTTP Server
 
-HTTP Server is built with Node.js and Express.js, features a primary route `/multinews`. This route will return news `id`, `news` data, news `tags` and news `title`. The returned data is in JSON format, which simplifies consumption.
+HTTP Server is built with Node.js and Express.js, features a primary route `/multinews`. This route will return news `id`, `news` data, news `tags` and news `title`. The returned data is in JSON format, which simplifies consumption. 
+
+The server response example:
 
 ```json
 {
@@ -250,6 +252,8 @@ HTTP Server is built with Node.js and Express.js, features a primary route `/mul
     "title": "Pope Francis Urges Young People to Speak Up"
 }
 ```
+
+
 
 ### Presenting Data with a React Frontend
 
@@ -279,4 +283,35 @@ const fetchNews = async () => {
   };
 ```
 
-The `News` component will get the JSON data everytime the page is reload.
+The `News` component will get the JSON data everytime the page is reload and re-rendering the user interface.
+
+```html
+<h2>{randomNews.title}</h2>
+<ul className='px-0 left-0'>
+
+{randomNews.tags.map((item, index) => (
+	<li key={index} className='inline-block bg-blue-500 text-white text-sm px-3 py-1  mr-2 mb-2 rounded' title='generated tag'>
+		{item}
+	</li>
+	))}
+</ul>
+<article className='text-left pb-5'>
+  {showFullNews ? randomNews.news : `${randomNews.news.substring(0, 500)}...`}
+</article>
+
+```
+
+The generated tags rendered as blue tags under the news title.
+
+![tags](assets/images/tags.png)
+
+
+## Additional Resources and References
+
+This section provides helpful resources and references for further understanding and exploration. Feel free to check out the following links:
+
+
+- [Full project source code on GitHub](https://github.com/junwatu/news-analysis-chatgpt-nodejs-griddb-code): Access the complete source code of the project.
+- [OpenAI Chat API Guide](https://platform.openai.com/docs/guides/chat): Dive into the OpenAI Chat API documentation to understand how to interact with the ChatGPT model and other conversational AI models.
+- [GridDB website](http://griddb.net/): Learn more about GridDB, the highly scalable and high-performance distributed database used in this project.
+- [Node.js Linux installation for Debian and Ubuntu-based distributions](https://nodejs.org/en/download/package-manager#debian-and-ubuntu-based-linux-distributions): Follow the instructions to install Node.js on your Linux system.
