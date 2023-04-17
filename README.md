@@ -49,7 +49,11 @@ Next, install the project's dependencies
 cd news-analysis-chatgpt-nodejs-griddb-code
 npm install
 ```
-Before running the project, it is crucial to have an OpenAI API key, as this is a primary requirement for this project. To obtain the key, [sign up](https://platform.openai.com/) for an account at OpenAI and follow the instructions to get your API key. 
+Before running the project, it is crucial to have an OpenAI API key, as this is a primary requirement for this project. 
+
+> You'll need to set up a paid account in order to use the API, but the cost is quite low at just $0.002 per 1,000 tokens. A rough estimate is that 1,000 tokens corresponds to around 200 to 300 words in English, based on the average word length of 4-5 characters plus a space (totaling 5-6 characters per word).
+
+To obtain the key, [sign up](https://platform.openai.com/account/api-keys) for an account at OpenAI and follow the instructions to get your API key. 
 
 ![openai-api-key](assets/images/openai-api-key.png)
 
@@ -78,7 +82,7 @@ Finally, access the web application by navigating to the URL `http://localhost:5
 
 ChatGPT is an advanced artificial intelligence language model developed by OpenAI, based on the GPT (Generative Pre-trained Transformer) architecture. The model is designed to understand and generate human-like text based on the input it receives. It is capable of performing various tasks, including answering questions, engaging in conversation, and generating text in a range of styles and formats. ChatGPT has been widely used in various applications, such as chatbots, content generation, translation, and more.
 
-As the core natural language processing component, ChatGPT is responsible for analyzing and generating tags from news articles. By leveraging its advanced language understanding capabilities, ChatGPT can identify and group related articles based on their underlying themes, significantly enhancing content organization and discovery.
+As the core natural language processing component, ChatGPT is responsible for analyzing and generating tags from news articles.
 
 #### Prompt
 
@@ -92,7 +96,7 @@ To generate tags from a news article, we can provide a prompt to ChatGPT that sp
 const prompt = `Generate five tags, less than 3 words, and give numbers for the tags from this news:\n\n${news}`;
 ```
 
-If we apply that prompt directly into the [ChatGPT](https://chat.openai.com/chat) website with a specific `news` we will get 5 tags.
+If we apply that prompt directly into the [ChatGPT](https://chat.openai.com/chat) website with a specific `news` data we will get 5 tags.
 
 ![generate-tag-chatgpt](/assets/images/tag-generate-chatgpt.png)
 
@@ -125,15 +129,13 @@ async function generateTagsFromNews(news) {
 export { generateTagsFromNews };
 ```
 
-To access the OpenAI API, you'll need to obtain an `OPENAI_API_KEY`, which can be obtained from this [link](https://platform.openai.com/account/api-keys). Note that you'll need to set up a paid account in order to use the API, but the cost is quite low at just $0.002 per 1,000 tokens. A rough estimate is that 1,000 tokens corresponds to around 200 to 300 words in English, based on the average word length of 4-5 characters plus a space (totaling 5-6 characters per word).
-
-### Data Acquisition and Processing with Node.js
+### Data Acquisition with Node.js
 
 Node.js serves as the backbone of the web application, allowing developers to build a fast, scalable, and reliable system for processing and managing news data. With its non-blocking, event-driven architecture and extensive package ecosystem, Node.js makes it easy to implement complex features, such as real-time data processing and API integration.
 
 For an optimal data source, utilizing a news API would be preferable. However, for this specific project, data can be obtained from the Hugging Face website at [huggingface.co](https://huggingface.co/datasets/multi_news).
 
-> Hugging Face is a popular platform for natural language processing (NLP) models and datasets
+> Hugging Face is a popular platform for natural language processing (NLP) models and datasets.
 
 **Multi-News**, is a dataset on Hugging Face consists of news articles and human-written summaries of these articles from the site newser.com. Each summary is professionally written by editors and includes links to the original articles cited.
 
@@ -141,33 +143,66 @@ With Node.js is easy to consume this data using native `fetch` function:
 
 ```js
 async function fetchMultiNews() {
-  const url =
-    "https://datasets-server.huggingface.co/splits?dataset=multi_news";
+	const url = "https://datasets-server.huggingface.co/first-rows?dataset=multi_news&config=default&split=train";
 
-  try {
-    const response = await fetch(url);
-    if (response.ok) {
-      const data = await response.json();
-      console.log("Dataset splits data:", data);
-      return data;
-    } else {
-      console.error("Error fetching dataset splits:", response.statusText);
-      return response.statusText;
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    throw new Error(error);
-  }
+	try {
+		const response = await fetch(url);
+		if (response.ok) {
+			const data = await response.json();
+			return data.rows
+		} else {
+			console.error('Error fetching dataset', response.statusText);
+			return response.statusText;
+		}
+	} catch (error) {
+		console.error('Error:', error);
+		throw new Error(error);
+	}
 }
 
-export { fetchMultiNews };
+export { fetchMultiNews }
 ```
 
-[DRAFT] --- Processing data
+### Data Processing with Node.js
+
+The main goal of the data processing is to prepare and format the news data and then store it in a container GridDB.
+
+```js
+const newsData = await fetchMultiNews();
+logger.info(`News Data: ${newsData.length}`);
+
+const cont = await store.putContainer(conInfo)
+const query = await cont.query("SELECT *");
+const rowset = await query.fetch();
+const results = [];
+
+while (rowset.hasNext()) {
+	const row = rowset.next();
+	const rowData = { id: `${row[0]}`, news: row[1] };
+	results.push(rowData);
+}
+
+let newsDataSelected;
+
+if (Array.isArray(results) && results.length == 0) {
+	logger.info('Database Empty...initialized!');
+	const newsDataObject = saveNewsData(newsData);
+	newsDataSelected = await generateData(newsDataObject)
+} else {
+	const newsDataObject2 = formatData(newsData);
+	newsDataSelected = await generateData(newsDataObject2);
+}
+```
+
+The code above checks if the container in GridDB is empty and processes the fetched news data accordingly, either saving the new data or read the existing data. 
+
+If the container is empty, the `saveNewsData` function will store the news data.
 
 ### Storing and Managing Data with GridDB
 
-To store and manage the vast amounts of news data and extracted topics, GridDB comes into play as the data storage solution. Its high-performance capabilities, support for horizontal scaling, and time-series data handling make it an ideal choice for managing the large-scale datasets involved in news tagging. Moreover, GridDB's efficient querying and data retrieval features ensure that the application can quickly serve relevant content to users.
+To store and manage the vast amounts of news data, GridDB comes into play as the data storage solution. Its high-performance capabilities, support for horizontal scaling, and time-series data handling make it an ideal choice for managing the large-scale datasets involved in news tagging. Moreover, GridDB's efficient querying and data retrieval features ensure that the application can quickly serve relevant content to users.
+
+For new GridDB installation go to this [link](https://docs.griddb.net/latest/).
 
 [DRAFT]
 -- code and explanation
