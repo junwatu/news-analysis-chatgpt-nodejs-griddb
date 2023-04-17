@@ -332,6 +332,7 @@ Here are some recommendations to enhance this project and suggestions for improv
 - Keep in mind that this project is currently an MVP (Minimum Viable Product), which means there's ample room for improvement. For a real-world implementation, consider acquiring news data live and through real-time methods for a more accurate and up-to-date user experience.
 - Introduce an admin dashboard for monitoring and managing OpenAI API usage. This feature would enable administrators to set restrictions, track usage, and maintain control over the application's functionality.
 - To provide a more seamless and user-friendly experience, implement a paginated news display instead of the current system where random news articles appear upon each page reload. Pagination allows users to browse and navigate content more easily, resulting in a more engaging and enjoyable experience.
+- Store generated tags in the database for enhanced user search and filtering.
 
 ## Additional Resources and References
 
