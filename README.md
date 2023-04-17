@@ -194,18 +194,41 @@ if (Array.isArray(results) && results.length == 0) {
 }
 ```
 
-The code above checks if the container in GridDB is empty and processes the fetched news data accordingly, either saving the new data or read the existing data. 
-
-If the container is empty, the `saveNewsData` function will store the news data.
+The code above checks if the container in GridDB is empty and processes the fetched news data accordingly, either saving the new data or read the existing data. If the container is empty, the `saveNewsData` function will store the news data.
 
 ### Storing and Managing Data with GridDB
 
-To store and manage the vast amounts of news data, GridDB comes into play as the data storage solution. Its high-performance capabilities, support for horizontal scaling, and time-series data handling make it an ideal choice for managing the large-scale datasets involved in news tagging. Moreover, GridDB's efficient querying and data retrieval features ensure that the application can quickly serve relevant content to users.
+To store and manage the vast amounts of news data, [GridDB](http://griddb.net/) comes into play as the data storage solution. Its high-performance capabilities, support for horizontal scaling, and time-series data handling make it an ideal choice for managing the large-scale datasets involved in news tagging. Moreover, GridDB's efficient querying and data retrieval features ensure that the application can quickly serve relevant content to users.
 
-For new GridDB installation go to this [link](https://docs.griddb.net/latest/).
+> For a new GridDB installation go to this [link](https://docs.griddb.net/latest/).
 
-[DRAFT]
--- code and explanation
+In the GridDB MultiNews container, there are two fields designed to store specific types of data: the identifier `id` and the news content `news`. The container is defined using the following JavaScript code:
+
+```js
+	const conInfo = new griddb.ContainerInfo({
+		'name': containerName,
+		'columnInfoList': [
+			["id", griddb.Type.INTEGER],
+			["news", griddb.Type.STRING]
+		],
+		'type': griddb.ContainerType.COLLECTION, 'rowKey': true
+	});
+```
+
+The `insert` function in the given code snippet is used to save data to a GridDB container. It takes two arguments: `data` and `container`. The `data` argument is an array containing collection of the news data to be stored, while the `container` argument refers to the GridDB container instance where the data will be saved. Here's a breakdown of the function:
+
+```js
+function insert(data, container) {
+	try {
+		container.put(data);
+		return { ok: true };
+	} catch (err) {
+		console.log(`insert: ${err}`);
+		return { ok: false, error: err };
+	}
+}
+
+```
 
 ### Presenting Data with a React Frontend
 
