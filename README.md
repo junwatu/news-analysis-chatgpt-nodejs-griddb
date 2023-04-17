@@ -232,14 +232,51 @@ function insert(data, container) {
 }
 ```
 
+### Node.js HTTP Server
+
+HTTP Server is built with Node.js and Express.js, features a primary route `/multinews`. This route will return news `id`, `news` data, news `tags` and news `title`. The returned data is in JSON format, which simplifies consumption.
+
+```json
+{
+    "id": "18",
+    "news": "VATICAN CITY (Reuters) - Pope Francis, ...",
+    "tags": [
+        "youth voices",
+        "tighter gun laws",
+        "palm sunday service",
+        "young catholics",
+        "church transparency"
+    ],
+    "title": "Pope Francis Urges Young People to Speak Up"
+}
+```
+
 ### Presenting Data with a React Frontend
 
-React is a popular JavaScript library for building user interfaces, especially for single-page applications. In this guide, we will explore how to effectively present data using a React frontend. By following best practices and employing modern techniques, you can create a responsive, visually appealing, and user-friendly data presentation.
+React is a widely-used JavaScript library for creating user interfaces, particularly in single-page applications. It is user-friendly, boasts a substantial community of developers, and offers excellent performance due to its efficient virtual DOM implementation.
 
-[DRAFT]
+For this project there is only one component to display the news data. The `News` component is responsible for fetching and displaying news data from the Node.js HTTP server. By using `useState` and `useEffect` hooks it's easy to manage component's state.
 
-- Introduction to React and its benefits in building interactive user interfaces
-- Step-by-step guide on setting up a React application
-- Integration of the React frontend with the Node.js backend and GridDB data
-- Examples of creating reusable components to display news topic modeling data
-- Tips on improving the user experience and interface design
+```js
+import React, { useState, useEffect } from 'react';
+
+const [randomNews, setRandomNews] = useState({});
+
+useEffect(() => {
+    fetchNews();
+  }, []);
+
+const fetchNews = async () => {
+    console.log(SERVER_URL);
+    try {
+      const response = await fetch(SERVER_URL);
+      const data = await response.json();
+      setRandomNews(data);
+	  setLoading(false);
+    } catch (error) {
+      console.error('Error fetching news:', error);
+    }
+  };
+```
+
+The `News` component will get the JSON data everytime the page is reload.
