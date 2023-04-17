@@ -69,6 +69,8 @@ npx turbo start
 
 Finally, access the web application by navigating to the URL `http://localhost:5137`
 
+![news-tagging](assets/images/news-tagging.png)
+
 
 ## Key Concepts and Practical Codes
 
