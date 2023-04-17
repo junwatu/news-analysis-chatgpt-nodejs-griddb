@@ -67,7 +67,7 @@ Once you have the key, edit the `.env` file on the `apps/server` directory
 OPENAI_API_KEY=<your_api_key>
 ```
 
-Replace <your_api_key> with your actual OpenAI API key. With the OpenAI API key set up, you can now proceed to run the project 
+Replace `<your_api_key>` with your actual OpenAI API key. With the OpenAI API key set up, you can now proceed to run the project 
 
 ```bash
 npx turbo start
