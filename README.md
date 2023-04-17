@@ -326,7 +326,7 @@ Using React, JavaScript array `map` method, HTML `<ul>` and `<li>`, and CSS, it'
 
 ![tags](assets/images/tags.png)
 
-## Improvement and Suggestions
+## Recommendations and Suggestions
 Here are some recommendations to enhance this project and suggestions for improvement:
 
 - Keep in mind that this project is currently an MVP (Minimum Viable Product), which means there's ample room for improvement. For a real-world implementation, consider acquiring news data live and through real-time methods for a more accurate and up-to-date user experience.
