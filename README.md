@@ -128,6 +128,7 @@ async function generateTagsFromNews(news) {
 
 export { generateTagsFromNews };
 ```
+The OpenAI API for the [Chat](https://platform.openai.com/docs/api-reference/chat) model utilizes the `createChatCompletion` function. By crafting the appropriate prompt, the model can generate outstanding completion responses.
 
 ### Data Acquisition with Node.js
 
