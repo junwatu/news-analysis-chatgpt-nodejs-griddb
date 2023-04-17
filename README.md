@@ -322,7 +322,7 @@ The `News` component will get the JSON data everytime the page is reload and re-
 
 ```
 
-The generated tags are rendered as blue tags under the news title.
+Using React, JavaScript array `map` method, HTML `<ul>` and `<li>`, and CSS, it's easy to display the tags as blue badges. 
 
 ![tags](assets/images/tags.png)
 
