@@ -313,6 +313,7 @@ This section provides helpful resources and references for further understanding
 
 - [Full project source code on GitHub](https://github.com/junwatu/news-analysis-chatgpt-nodejs-griddb-code): Access the complete source code of the project.
 - [OpenAI Chat API Guide](https://platform.openai.com/docs/guides/chat): Dive into the OpenAI Chat API documentation to understand how to interact with the ChatGPT model and other conversational AI models.
-- [ChatGPT](https://chat.openai.com/): Experiment with the ChatGPT model in a user-friendly interface, perfect for testing out conversational AI capabilities.
+- [OpenAI Chat API Reference](https://platform.openai.com/docs/api-reference/chat): Access the detailed API reference for the OpenAI Chat API, covering parameters, response format, and more.
 - [GridDB website](http://griddb.net/): Learn more about GridDB, the highly scalable and high-performance distributed database used in this project.
 - [Node.js Linux installation](https://nodejs.org/en/download/package-manager#debian-and-ubuntu-based-linux-distributions): Follow the instructions to install Node.js on your Linux system.
+- [ChatGPT](https://chat.openai.com/): Experiment with the ChatGPT model in a user-friendly interface, perfect for testing out conversational AI capabilities.
