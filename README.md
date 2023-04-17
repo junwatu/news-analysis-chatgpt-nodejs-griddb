@@ -128,7 +128,10 @@ async function generateTagsFromNews(news) {
 
 export { generateTagsFromNews };
 ```
+
 The OpenAI API for the [Chat](https://platform.openai.com/docs/api-reference/chat) model utilizes the `createChatCompletion` function. By crafting the appropriate prompt, the model can generate outstanding completion responses.
+
+It is essential to know that the `gpt-3.5-turbo` model has a `max_tokens` limit of 4096 tokens. If a prompt exceeds this limit, you will need to truncate, omit, or otherwise condense your text to ensure it fits within the model's maximum capacity.
 
 ### Data Acquisition with Node.js
 
@@ -206,14 +209,13 @@ To store and manage the vast amounts of news data, [GridDB](http://griddb.net/) 
 In the GridDB MultiNews container, there are two fields designed to store specific types of data: the identifier `id` and the news content `news`. The container is defined using the following JavaScript code:
 
 ```js
-	const conInfo = new griddb.ContainerInfo({
-		'name': containerName,
-		'columnInfoList': [
-			["id", griddb.Type.INTEGER],
-			["news", griddb.Type.STRING]
-		],
-		'type': griddb.ContainerType.COLLECTION, 'rowKey': true
-	});
+const conInfo = new griddb.ContainerInfo({
+	'name': containerName,
+	'columnInfoList': [
+		["id", griddb.Type.INTEGER],
+		["news", griddb.Type.STRING]],
+	'type': griddb.ContainerType.COLLECTION, 'rowKey': true
+});
 ```
 
 The `insert` function in the given code snippet is used to save data to a GridDB container. It takes two arguments: `data` and `container`. The `data` argument is an array containing collection of the news data to be stored, while the `container` argument refers to the GridDB container instance where the data will be saved. Here's a breakdown of the function:
@@ -228,10 +230,11 @@ function insert(data, container) {
 		return { ok: false, error: err };
 	}
 }
-
 ```
 
 ### Presenting Data with a React Frontend
+
+React is a popular JavaScript library for building user interfaces, especially for single-page applications. In this guide, we will explore how to effectively present data using a React frontend. By following best practices and employing modern techniques, you can create a responsive, visually appealing, and user-friendly data presentation.
 
 [DRAFT]
 
