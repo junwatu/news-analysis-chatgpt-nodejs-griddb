@@ -42,7 +42,7 @@ and Node.js with this command
 node --version
 ```
 
-If all is well, clone the project from the GitHub repository [news tagging](https://github.com/junwatu/news-analysis-chatgpt-nodejs-griddb-code)
+If all is well, clone the [news tagging](https://github.com/junwatu/news-analysis-chatgpt-nodejs-griddb-code) project from the GitHub repository 
 
 ```bash
 git clone git@github.com:junwatu/news-analysis-chatgpt-nodejs-griddb-code.git
