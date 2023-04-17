@@ -6,7 +6,7 @@ One solution to the problems is to use news tagging. It plays a crucial role in 
 
 _What if there were an automated content tagging system that could efficiently process news articles in real-time?_
 
-In this blog post, we'll create an **automated content tagging system**. We'll delve into how the synergy of OpenAI, Node.js, and GridDB can create a powerful topic modeling solution to revolutionize automated content tagging in the digital news landscape. We'll leverage Node.js to process news data, ChatGPT to analyze and extract topics from the data, and GridDB to store and retrieve the information. Ultimately, we'll present the organized data to users.
+In this blog post, we'll create an **automated news tagging system**. We'll delve into how the synergy of OpenAI, Node.js, and GridDB can create a powerful topic modeling solution to revolutionize automated content tagging in the digital news landscape. We'll leverage Node.js to process news data, ChatGPT to analyze and extract topics from the data, and GridDB to store and retrieve the information. Ultimately, we'll present the organized data to users.
 
 ## Auto Content Tagging System Overview
 
