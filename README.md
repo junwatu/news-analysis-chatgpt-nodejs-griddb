@@ -104,7 +104,7 @@ If we apply that prompt directly to the [ChatGPT](https://chat.openai.com/chat) 
 
 #### Tags Generator Code
 
-OpenAI provides [Chat API](https://platform.openai.com/docs/api-reference/chat) for users to access ChatGPT models. We will use the `gpt-3.5-turbo` model to generate tags from our news.
+OpenAI provides [Chat API](https://platform.openai.com/docs/api-reference/chat) for users to access ChatGPT models. We will use the `gpt-3.5-turbo` model to generate tags from our news. This is the same model utilized by the ChatGPT website.
 
 ```js
 import { Configuration, OpenAIApi } from "openai";
