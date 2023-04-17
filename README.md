@@ -8,7 +8,7 @@ _What if there were an automated content tagging system that could efficiently p
 
 In this blog post, we'll create an **automated news tagging system**. We'll delve into how the synergy of OpenAI, Node.js, and GridDB can create a powerful automated news tagging in the digital news landscape. We'll leverage Node.js to process news data, ChatGPT to analyze and extract tags from the news, and GridDB to store and retrieve the information. Ultimately, we'll present the news and the tags to users.
 
-## Auto Content Tagging System Overview
+## Automated News Tagging System Overview
 
 ChatGPT, developed by OpenAI, is a cutting-edge language model that excels in understanding and generating human-like text. Node.js is a popular open-source runtime environment built on Chrome's V8 JavaScript engine, enabling developers to create scalable and efficient web applications. GridDB is a highly performant NoSQL database designed for handling time-series data and large-scale datasets, with features such as automatic data partitioning and high availability.
 
