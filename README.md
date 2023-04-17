@@ -49,7 +49,11 @@ Next, install the project's dependencies
 cd news-analysis-chatgpt-nodejs-griddb-code
 npm install
 ```
-Before running the project, it is crucial to have an OpenAI API key, as this is a primary requirement for this project. To obtain the key, [sign up](https://platform.openai.com/) for an account at OpenAI and follow the instructions to get your API key. Once you have the key, edit `.env` file on `apps/server` directory.
+Before running the project, it is crucial to have an OpenAI API key, as this is a primary requirement for this project. To obtain the key, [sign up](https://platform.openai.com/) for an account at OpenAI and follow the instructions to get your API key. 
+
+![openai-api-key](assets/images/openai-api-key.png)
+
+Once you have the key, edit `.env` file on `apps/server` directory.
 
 ```ini
 OPENAI_API_KEY=<your_api_key>
